@@ -93,22 +93,24 @@ function generateTags() {
     const tagsWrapper = document.querySelector(optArticleTagsSelector);
     console.log(tagsWrapper);
     /* find tags wrapper */
-    let html = "";
-    /* make html variable with empty string */
-
     const articleTags = article.getAttribute("data-tags");
     console.log(articleTags);
     /* get tags from data-tags attribute */
     const articleTagsArray = articleTags.split(" ");
+    console.log(articleTagsArray);
     /* split tags into array */
-  }
 
-  /* START LOOP: for each tag */
-  /* generate HTML of the link */
-  /* add generated code to html variable */
-  /* END LOOP: for each tag */
-  /* insert HTML of all the links into the tags wrapper */
+    for (let tag of articleTagsArray) {
+      /* START LOOP: for each tag */
+      const tagLink = `<li><a href="#${tag}">${tag}</a></li>`;
+      console.log(tagLink); /* generate HTML of the link */
+      /* make html variable with empty string */
+      let html = " " + tagLink; /* add generated code to html variable */
+      article.innerHTML =
+        article.innerHTML +
+        html; /* insert HTML of all the links into the tags wrapper */
+    } /* END LOOP: for each tag */
+  }
   /* END LOOP: for every article: */
 }
-
 generateTags();
