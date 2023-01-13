@@ -134,10 +134,12 @@ function tagClickHandler(event) {
 }
 
 function addClickListenersToTags() {
+  const linksToTags = document.querySelector(".list, .li.a");
   /* find all links to tags */
-  /* START LOOP: for each link */
-  /* add tagClickHandler as event listener for that link */
-  /* END LOOP: for each link */
+  for (let linkToTag of linksToTags) {
+    /* START LOOP: for each link */
+    linkToTag.addEventListener("click", tagClickHandler);
+    /* add tagClickHandler as event listener for that link */
+  } /* END LOOP: for each link */
 }
-
 addClickListenersToTags();
