@@ -134,12 +134,33 @@ function tagClickHandler(event) {
 }
 
 function addClickListenersToTags() {
-  const linksToTags = document.querySelector(".list, .li.a");
+  const linkToTags = document.querySelectorAll(".list, .li.a");
+  console.log(linkToTags);
   /* find all links to tags */
-  for (let linkToTag of linksToTags) {
+  for (let linkToTag of linkToTags) {
     /* START LOOP: for each link */
     linkToTag.addEventListener("click", tagClickHandler);
     /* add tagClickHandler as event listener for that link */
   } /* END LOOP: for each link */
 }
 addClickListenersToTags();
+
+const optArticleAuthorSelector = ".list.authors";
+console.log(optArticleAuthorSelector);
+
+function generateAuthors() {
+  const articles = document.querySelectorAll(optArticleSelector);
+  let html = "";
+  const listAuthors = document.querySelector(".authors");
+  /* find all articles */
+  for (let article of articles) {
+    const author = article
+      .querySelector(".post-author")
+      .innerHTML.replace("by ", "");
+
+    html += `<li><a href="#${author}">${author}</a></li>`;
+  }
+  listAuthors.innerHTML = html;
+}
+
+generateAuthors();
