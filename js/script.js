@@ -164,3 +164,32 @@ function generateAuthors() {
 }
 
 generateAuthors();
+
+function authorClickHandler(event) {
+  event.preventDefault();
+  const clickedElement = this;
+  const href = clickedElement.getAttribute("href");
+  const listAuthors = document.querySelector(".authors");
+  const tagAuthor = href.replace(`#${author}`, `#${""}`);
+  const authorLinks = document.querySelectorAll(`a.active[href^=#${author}]`);
+  for (authorLink of authorLinks) {
+    authorLink.classList.remove("active");
+  }
+  const allAuthorLinks = href.querySelectorAll("href");
+  for (allAuthorLink of allAuthorLinks) {
+    allAuthorLink.classList.add("active");
+  }
+  generateAuthors('[data-author="' + tagAuthor + '"]');
+}
+authorClickHandler();
+
+function addClickListenersToAuthors() {
+  const allAuthorLinks = document.querySelectorAll(
+    `a.active[href^=#${author}]`
+  );
+
+  for (let allAuthorLink of allAuthorLinks) {
+    allAuthorLink.addEventListener("click", tagClickHandler);
+  }
+}
+addClickListenersToAuthors();
