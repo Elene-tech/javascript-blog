@@ -6,6 +6,9 @@ const templates = {
   tagLink: Handlebars.compile(
     document.querySelector("#template-article-tag").innerHTML
   ),
+  authorLink: Handlebars.compile(
+    document.querySelector("#template-author-link").innerHTML
+  ),
 };
 
 function titleClickHandler(event) {
@@ -121,7 +124,7 @@ function generateTags() {
 
     for (let tag of articleTagsArray) {
       /* START LOOP: for each tag */
-      const linkHTMLData = { tag: tag, tag: articleTagsArray };
+      const linkHTMLData = { tag: tag, tag: articleTagsArray }; // added tagLink template
       const linkHTML = templates.tagLink(linkHTMLData);
       /*const linkHTML = `<li><a href="#tag-${tag}">${tag}</a></li>`;*/
       /* generate HTML of the link */
@@ -224,7 +227,10 @@ function generateAuthors() {
     const authorsWrapper = article.querySelector(optArticleAuthorSelector);
     console.log(authorsWrapper);
     const author = article.getAttribute("data-author");
-    const html = `<li><a href="author-${author}">${author}</a></li>`;
+
+    const linkHTMLData = { author: author, author: author };
+    const html = templates.authorLink(linkHTMLData); //added link to author under article
+    /*const html = `<li><a href="author-${author}">${author}</a></li>`;*/
     article.querySelector(".post-author").innerHTML = html;
 
     if (!allAuthors.hasOwnProperty(author)) {
