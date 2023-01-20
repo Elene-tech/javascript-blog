@@ -1,4 +1,12 @@
 "use strict";
+const templates = {
+  articleLink: Handlebars.compile(
+    document.querySelector("#template-article-link").innerHTML
+  ),
+  tagLink: Handlebars.compile(
+    document.querySelector("#template-article-tag").innerHTML
+  ),
+};
 
 function titleClickHandler(event) {
   event.preventDefault();
@@ -56,13 +64,8 @@ function generateTitleLinks(customSelector = " ") {
     /* get the title from the title element */
     const title = articleTitle.innerHTML;
     /* create HTML of the link */
-    const link = `
-     <li>
-         <a href="#${articleID}">
-               <span>${title}</span>
-         </a>
-     </li>
-    `;
+    const linkHTMLData = { id: articleID, title: title }; //taplate added
+    const link = templates.articleLink(linkHTMLData);
     string += link;
   });
   /* insert link into titleList */
@@ -118,7 +121,9 @@ function generateTags() {
 
     for (let tag of articleTagsArray) {
       /* START LOOP: for each tag */
-      const linkHTML = `<li><a href="#tag-${tag}">${tag}</a></li>`;
+      const linkHTMLData = { tag: tag, tag: articleTagsArray };
+      const linkHTML = templates.tagLink(linkHTMLData);
+      /*const linkHTML = `<li><a href="#tag-${tag}">${tag}</a></li>`;*/
       /* generate HTML of the link */
       /* make html variable with empty string */
       html = html + linkHTML;
